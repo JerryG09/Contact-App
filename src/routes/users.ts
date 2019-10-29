@@ -2,16 +2,16 @@ import express from 'express';
 const router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function(_req, res) {
   res.send('Hello User, How are you!');
 });
-router.post('/', function(req, res, next) {
+router.post('/', function(_req, res) {
   res.send('Hello User, What did you send!');
 });
-router.put('/', function(req, res, next) {
+router.put('/', function(_req, res) {
   res.send('Hello User, you made update!');
 });
-router.delete('/', function(req, res, next) {
+router.delete('/', function(_req, res) {
   res.send('Hello User, you mean to delete!');
 });
 

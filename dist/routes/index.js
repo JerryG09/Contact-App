@@ -6,16 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', function (_req, res) {
     res.render('index', { title: 'Express' });
 });
-router.post('/', function (req, res, next) {
+router.post('/', function (_req, res) {
     res.send("Got a POST request");
 });
-router.put('/', function (req, res, next) {
+router.put('/', function (_req, res) {
     res.send("Got a PUT request");
 });
-router.delete('/', function (req, res, next) {
+router.delete('/', function (_req, res) {
     res.send("Got a DELETE request");
 });
 exports.default = router;
