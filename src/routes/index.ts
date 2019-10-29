@@ -1,5 +1,5 @@
 import express from 'express';
-var router = express.Router();
+const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -18,4 +18,4 @@ router.delete('/', function(req, res, next) {
   res.send("Got a DELETE request");
 });
 
-module.exports = router;
+export default router;
