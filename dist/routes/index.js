@@ -19,3 +19,4 @@ router.delete('/', function (req, res, next) {
     res.send("Got a DELETE request");
 });
 exports.default = router;
+//# sourceMappingURL=index.js.map

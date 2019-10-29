@@ -12,7 +12,7 @@ const index_1 = __importDefault(require("./routes/index"));
 const users_1 = __importDefault(require("./routes/users"));
 const app = express_1.default();
 // view engine setup
-app.set('views', path_1.default.join(__dirname, 'views'));
+app.set('views', path_1.default.join(__dirname, '../views'));
 app.set('view engine', 'pug');
 app.use(morgan_1.default('dev'));
 app.use(express_1.default.json());
@@ -35,3 +35,4 @@ app.use(function (err, req, res, _next) {
     res.render('error');
 });
 exports.default = app;
+//# sourceMappingURL=app.js.map
