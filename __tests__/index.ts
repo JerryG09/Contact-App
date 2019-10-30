@@ -35,17 +35,20 @@ describe("Get Endpoint", () => {
           {
             id: 1,
             name: "Adams Cruff",
-            phoneNumber: "09094939291"
+            phoneNumber: "09094939291",
+            email: "adams@gmail.com"
           },
           {
             id: 2,
             name: "Lola Coker",
-            phoneNumber: "09094939291"
+            phoneNumber: "09094939291",
+            email: "lolcoker@gmail.com"
           },
           {
             id: 3,
             name: "Desmond Wande",
-            phoneNumber: "09094939291"
+            phoneNumber: "09094939291",
+            email: "desmondW@gmail.com"
           }
         ]
       })
@@ -60,7 +63,8 @@ describe("Get Endpoint", () => {
       "data": {
         id: 1,
         name: "Adams Cruff",
-        phoneNumber: "09094939291"
+        phoneNumber: "09094939291",
+        email: "adams@gmail.com"
       }
     })
   })
@@ -73,13 +77,15 @@ describe('Post Endpoint', () => {
       .send({
         id: "4",
         name: 'Eze Babs',
-        phoneNumber: '0808033221144'
+        phoneNumber: '0808033221144',
+        email: 'eze_babs@gmail.com'
       })
     expect(res.status).toBe(201)
     expect(res.body).toEqual({"data": 
       {"id": "4", 
       "name": "Eze Babs", 
-      "phoneNumber": "0808033221144"},
+      "phoneNumber": "0808033221144",
+      "email": "eze_babs@gmail.com"},
       "message": "Contact added successfully"})
   })
 })
@@ -97,19 +103,10 @@ describe("Put Endpoint", () => {
         data: {
           "id": 2,
           "name": "Lola Babz",
-          "phoneNumber": "09094939290"
+          "phoneNumber": "09094939290",
+          "email": "lolcoker@gmail.com"
         },
         "message": "user with id 2 edited succesfully"
       })
   })
 })
-
-// describe("Delete Endpoint", () => {
-//   test("should delete a contact", async () => {
-//     const res = await request(app)
-//       .put('/contacts/2')
-//       expect(res.body).toEqual({
-
-//       })
-//   })
-// })
