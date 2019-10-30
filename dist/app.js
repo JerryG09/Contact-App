@@ -10,6 +10,7 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
 const index_1 = __importDefault(require("./routes/index"));
 const users_1 = __importDefault(require("./routes/users"));
+const contacts_1 = __importDefault(require("./routes/contacts"));
 const app = express_1.default();
 // view engine setup
 app.set('views', path_1.default.join(__dirname, '../views'));
@@ -21,6 +22,7 @@ app.use(cookie_parser_1.default());
 app.use(express_1.default.static(path_1.default.join(__dirname, 'public')));
 app.use('/', index_1.default);
 app.use('/users', users_1.default);
+app.use('/contacts', contacts_1.default);
 // catch 404 and forward to error handler
 app.use(function (_req, _res, next) {
     next(http_errors_1.default(404));

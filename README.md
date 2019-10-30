@@ -1,3 +1,1 @@
 "# express-generator" 
-
-TypeScipt
