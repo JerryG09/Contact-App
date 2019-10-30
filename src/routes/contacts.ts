@@ -61,7 +61,7 @@ router.post('/', (req,res) => {
 
   const newContact = req.body;
   db.push(newContact)
-  res.status(200).json({
+  res.status(201).json({
     message: "Contact added successfully",
     data: newContact
   })
@@ -86,7 +86,7 @@ router.put('/:ContactID', (req, res) => {
   contactData.name = req.body.name
   contactData.phoneNumber = req.body.phoneNumber
   res.status(200).json({
-    message: `user with id ${contactID} edited succsfully`,
+    message: `user with id ${contactID} edited succesfully`,
     data: contactData
   })
 
