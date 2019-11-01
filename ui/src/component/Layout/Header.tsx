@@ -1,10 +1,15 @@
 import React from 'react'
+import { AppBar, Toolbar, Typography } from '@material-ui/core'
 
-const Header: React.FC<{}> = () => {
+const Header: React.FC<{}> = (props) => {
   return (
-    <div>
-      <h1>Hello from Header</h1>
-    </div>
+    <AppBar>
+      <Toolbar>
+        <Typography>
+          Title
+        </Typography>
+      </Toolbar>
+    </AppBar>
   )
 }
 
