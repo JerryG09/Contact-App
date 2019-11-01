@@ -42,6 +42,7 @@ router.get('/:ContactID', (req, res) => {
     res.status(200).json({ data: contactData });
 });
 router.post('/', (req, res) => {
+    // const { name, id, phoneNumber, email } = req.body
     if (!req.body.name || !req.body.id || !req.body.phoneNumber || !req.body.email) {
         res.status(404).json({
             message: "input fields are required"
