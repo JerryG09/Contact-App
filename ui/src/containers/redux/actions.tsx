@@ -1,8 +1,14 @@
 import * as types from "./types"
-import { number } from "prop-types"
 
-export const getContact = (contactID: number) => {
+export const getAContact = (contactID: number) => {
     return {
+        // axios call
         type: types.GET_CONTACT
+    }
+}
+
+export const fetchContacts = () => {
+    return {
+        // axios call
     }
 }

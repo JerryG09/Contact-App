@@ -1,1 +1,2 @@
 export const GET_CONTACT = "GET_CONTACT"
+export const FETCH_CONTACTS = "FETCH_CONTACTS"
