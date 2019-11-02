@@ -1,6 +1,6 @@
-import React from 'react'
-import { Header, Footer } from '../Layout'
-import { Contact } from '../Contact'
+import React from './node_modules/react'
+import { Header, Footer } from '../../common'
+import { Contact } from '../contact'
 
 const Home: React.FC<{}> = () => {
   return (

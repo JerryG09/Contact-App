@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Home from './component/Views/Home'
+import Home from './component/views/Home'
 import Button from '@material-ui/core/Button';
 
 
