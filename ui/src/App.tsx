@@ -1,16 +1,12 @@
 import React from 'react';
 import './App.css';
 import Home from './component/views/Home'
-import Button from '@material-ui/core/Button';
 
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <Home />
-      <Button variant="contained" color="primary">
-        Hello World
-      </Button>
     </div>
   );
 }
