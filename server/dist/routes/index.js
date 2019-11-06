@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 /* GET home page. */
 router.get('/', function (_req, res) {
-    res.render('index', { title: 'Express' });
+    res.render('index', { title: 'My API' });
 });
 router.post('/', function (_req, res) {
     res.send("Got a POST request");

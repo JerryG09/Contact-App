@@ -3,7 +3,7 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(_req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'My API' });
 });
 
 router.post('/', function(_req, res) {
@@ -37,7 +37,7 @@ router.get('/sq003', function(_req, res) {
 });
 
 router.get('/sq003/:StudentID', (req, res) => {
-  
+
   const studentID = Number(req.params.StudentID)
 
   if (Number.isNaN(studentID)) {
