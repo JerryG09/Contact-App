@@ -1,50 +1,50 @@
 import React, {useState} from 'react'
-import Button from '@material-ui/core/Button';
 
-const Contact: React.FC<{}> = (props) => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
+function Contact(props: any) {
 
-  const handleName = (e: any) => {
-    setName(e.target.value);
+  const contact = {
+    name: "",
+    email: "",
+    phoneNumber: ""
   }
 
-  const handlePhone = (e: any) => {
-    setPhone(e.target.value);
-  }
+  const [currentContact, setContact] = useState(contact);
 
-  const handleEmail = (e: any) => {
-    setEmail(e.target.value);
+  function handleChange(e: any) {
+    e.preventDefault();
+    const value = e.target.value;
+    const name = e.target.name;
+    setContact({ ...currentContact, [name]: value });
   }
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    
-    const newContact = {
-      name,
-      phone,
-      email
-    }  
-    
-    // console.log(newContact)
+
+    if(!currentContact.name || !currentContact.phoneNumber || !currentContact.email) {
+      return window.alert("please, enter required field")
+    }
+
+    handleSubmit((prevContacts: any) => prevContacts.concat(currentContact))
+    console.log(currentContact)
+
   }
+   
 
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="">Add Contact: </label>
-        <input name="name" placeholder="name" value={name} onChange={handleName} />
-        <input name="phone" placeholder="Phone Number" value={phone} onChange={handlePhone} />
-        <input name="email" placeholder="Email" value={email} onChange={handleEmail} />
-        
-        <Button variant="contained" color="primary">
-          ADD CONTACT
-        </Button>
+        <input name="name" placeholder="name" value={currentContact.name} onChange={handleChange} />
+        <input name="phoneNumber" placeholder="Phone Number" value={currentContact.phoneNumber} onChange={handleChange} />
+        <input name="email" placeholder="Email" value={currentContact.email} onChange={handleChange} />
+
+        <button>ADD</button>
       </form>
     </div>
   )
 }
+
+// value={props.contact.name}
 
 export  default Contact;

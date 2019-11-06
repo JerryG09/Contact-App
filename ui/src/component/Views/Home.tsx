@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
-import { Header, Footer } from '../../common'
+import React, { useEffect, useState } from 'react'
+import { Header } from '../../common'
 import { Contact } from '../contact'
 import { connect } from "react-redux";
-import { getAContact, fetchContacts } from "../../containers/redux/actions"
+import { fetchContacts, addContact } from "../../containers/redux/actions"
 
 
 function Home (props: any) {
@@ -16,21 +16,37 @@ function Home (props: any) {
   }
 
   const data = props.contacts.contacts.data.map((contact: any) => (
-    <div key={contact.id}>
-      <p>{contact.id}</p>
-      <p>{contact.name}</p>
-      <p>{contact.email}</p>
+    <div className="container" key={contact.id}>
+      <div className="col d-flex mt-5">
+        <div className="col-md-1">{contact.id}</div>
+        <div className="col-md-3">{contact.name}</div>
+        <div className="col-md-3">{contact.email}</div>
+        <div className="col-md-3">{contact.phoneNumber}</div>
+        <div className="col-md-1"><span className="btn btn-primary">EDIT</span></div>
+        <div className="col-md-1"><span className="btn btn-danger">DELETE</span></div>
+      </div>
     </div>
   ))
 
   return (
     <div>
       <Header />
-      <Contact />
+      <Contact onSubmit={handleSubmit} handleChange={handleChange} />
       {data}
 
     </div>
   )
+}
+
+// const [] = useState()
+// setContact={setContact} contact={contact}
+
+function handleChange() {
+
+}
+
+function handleSubmit() {
+
 }
 
 const mapStateToProps = (state: any) => {
@@ -41,7 +57,8 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    handleContacts: () => dispatch(fetchContacts())
+    handleContacts: () => dispatch(fetchContacts()),
+    createContact: () => dispatch(addContact())
   }
 }
 

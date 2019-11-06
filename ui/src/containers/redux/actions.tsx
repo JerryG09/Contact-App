@@ -1,8 +1,11 @@
 import * as types from "./types"
 import axios from "axios"
 
-export const getAContact = (contactID: number) => {
-    
+export const createContact = (data: any) => {
+  return {
+    type: types.GET_CONTACT,
+    payload: data
+  }
 }
 
 export const getContacts = (data: any) => {
@@ -10,6 +13,15 @@ export const getContacts = (data: any) => {
     type: types.FETCH_CONTACTS,
     payload: data
   }
+}
+
+export const getAContact = (id: number) => (dispatch: any) => {
+  axios.get('/contacts/?id')
+    .then(res => {
+      dispatch(getAContact(res.data))
+    }, (error) => {
+      console.log(error)
+    })
 }
 
 export const fetchContacts = () => (dispatch: any) => {
@@ -21,8 +33,9 @@ export const fetchContacts = () => (dispatch: any) => {
     })
 }
 
-// export const addContact = () => (dispatch: any) => {
-//   console.log('add contact')
-//   axios.post('/register')
-//     .then(res => dispatch(console.log(res)))
-// }
+export const addContact = () => (dispatch: any) => {
+  axios.post('/post', {})
+    .then(res => {
+      dispatch()
+    })
+}
