@@ -14,7 +14,7 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:4.0.3
 
-    working_directory: ~/express-generator/server
+    working_directory: ~/express-generator
 
     steps:
       - checkout
