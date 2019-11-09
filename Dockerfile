@@ -1,13 +1,39 @@
-FROM node:10
+FROM node:10 as server
 
-WORKDIR /usr/src/app
+WORKDIR /tmp/server
 
-COPY . .
+COPY server .
 
-RUN cd client && yarn && yarn build
+RUN yarn --frozen-lockfile && yarn build
 
-RUN cd server && yarn && yarn build
+FROM node:10 as client
 
-EXPOSE 8080
+WORKDIR /tmp/client
 
-CMD ["node","./server/dist/app.js"]
+COPY client .
+
+RUN yarn --frozen-lockfile && yarn build
+
+FROM node:10 as app
+
+LABEL Maintainer="Femi - NERT"
+
+WORKDIR /app/www
+
+COPY ./server/package.json ./server/yarn.lock ./
+
+RUN yarn --pure-lockfile --prod
+
+RUN mkdir server
+
+COPY ./server/bin bin
+
+COPY --from=client /tmp/client/build build
+COPY --from=server /tmp/server/dist dist
+
+ENV MONGO_URI="mongodb://mongo:27017/test"
+
+EXPOSE 4000
+
+CMD ["node", "./bin/www"]
+
