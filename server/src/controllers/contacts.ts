@@ -57,6 +57,27 @@ function fetchAllContacts(_req: express.Request, res: express.Response) {
     });
 }
 
+function findAContact(req: express.Request, res: express.Response) {
+  const phone = req.params.phone;
+  return Contacts.findOne({ phone })
+    .then(data => {
+      if (!data) {
+        throw new Error('Contact not found');
+      }
+      return res.status(200).json({
+        success: true,
+        data,
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      return res.status(400).json({
+        succes: false,
+        message: 'Contact not found',
+      });
+    });
+}
+
 
 export {
   addContact,
