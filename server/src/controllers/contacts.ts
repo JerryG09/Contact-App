@@ -109,6 +109,32 @@ function editContact(req: express.Request, res: express.Response) {
     });
 }
 
+function deleteContact(req: express.Request, res: express.Response) {
+  const phoneId = req.params.phoneId;
+
+  return Contacts.remove({ phone: phoneId })
+    .then(data => {
+      if (data.n === 0) {
+        return res.status(404).json({
+          message: 'Contact not found',
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: 'contact removed successfully',
+        data,
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      return res.status(400).json({
+        succes: false,
+        message: 'Contact not found',
+      });
+    });
+}
+
 export {
   addContact,
   findAContact,
