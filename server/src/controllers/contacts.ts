@@ -78,6 +78,36 @@ function findAContact(req: express.Request, res: express.Response) {
     });
 }
 
+function editContact(req: express.Request, res: express.Response) {
+  const phoneId = req.params.phoneId;
+  const { name, email, phone, company } = req.body;
+
+  Contacts.findOne({ phone: phoneId })
+    .then(data => {
+      if (!data) {
+        throw new Error('Contact not found');
+      }
+
+      // const { name, email, phone, company, ...rest } = data
+
+      name ? (data.name = name) : data.name;
+      email ? (data.email = email) : data.email;
+      phone ? (data.phone = phone) : data.email;
+      company ? (data.company = company) : data.company;
+
+      res.status(200).json({
+        success: true,
+        data,
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      return res.status(400).json({
+        succes: false,
+        message: 'Contact not found',
+      });
+    });
+}
 
 export {
   addContact,
