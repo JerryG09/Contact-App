@@ -59,4 +59,28 @@ function signUp(req: express.Request, res: express.Response) {
   });
 }
 
+function deleteUser(req: express.Request, res: express.Response) {
+  User.remove({ _id: req.params.userId })
+    .exec()
+    .then(data => {
+      if (data.n === 0) {
+        return res.status(404).json({
+          message: 'Contact not found',
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: 'contact removed successfully',
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+}
+
+
 export { signUp, login, deleteUser };
