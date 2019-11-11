@@ -40,6 +40,24 @@ function addContact(req: express.Request, res: express.Response) {
     });
 }
 
+function fetchAllContacts(_req: express.Request, res: express.Response) {
+  return Contacts.find({})
+    .then(data => {
+      return res.status(200).json({
+        success: true,
+        data,
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      return res.status(400).json({
+        succes: false,
+        message: 'Contact not found',
+      });
+    });
+}
+
+
 export {
   addContact,
   findAContact,
