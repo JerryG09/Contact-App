@@ -12,7 +12,6 @@ app.use(cors())
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
 import contactRouter from './routes/contacts'
-import registerRouter from './routes/register'
 
 
 
@@ -27,10 +26,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/register', registerRouter)
-app.use('/contacts', contactRouter)
+app.use('/api/v1', indexRouter);
+app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/contacts', contactRouter)
 
 // catch 404 and forward to error handler
 app.use(function(_req, _res, next) {
@@ -43,9 +41,9 @@ interface ExpressError extends Error {
 
 // error handler
 app.use(function(
-  err: ExpressError, 
-  req: Request, 
-  res: Response, 
+  err: ExpressError,
+  req: Request,
+  res: Response,
   _next: NextFunction
   ) {
   // set locals, only providing error in development
