@@ -1,18 +1,13 @@
 import express from 'express';
+
+import { signUp, login, deleteUser } from '../controllers/user';
+// import { userValidator } from "../validation/contact"
 const router = express.Router();
 
 /* GET users listing. */
-router.get('/', function(_req, res) {
-  res.send('Hello User, How are you!');
-});
-router.post('/', function(_req, res) {
-  res.send('Hello User, What did you send!');
-});
-router.put('/', function(_req, res) {
-  res.send('Hello User, you made update!');
-});
-router.delete('/', function(_req, res) {
-  res.send('Hello User, you mean to delete!');
-});
+router.post('/signup', signUp);
+router.post('/login', login)
+router.delete('/:userId', deleteUser)
+
 
 export default router;
