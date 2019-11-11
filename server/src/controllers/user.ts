@@ -82,5 +82,50 @@ function deleteUser(req: express.Request, res: express.Response) {
     });
 }
 
+function login(req: express.Request, res: express.Response) {
+  const { email, password } = req.body;
+
+  User.find({ email })
+    .exec()
+    .then(user => {
+      if (user.length < 1) {
+        return res.status(401).json({
+          message: 'Authorization failed',
+        });
+      }
+      bcrypt.compare(password, user[0].password, (err, result) => {
+        if (err) {
+          return res.status(401).json({
+            message: 'Authorization failed',
+          });
+        }
+        if (result) {
+          const token = jwt.sign(
+            {
+              email: user[0].email,
+              userId: user[0].id,
+            },
+            'secret',
+            {
+              expiresIn: '1h',
+            },
+          );
+          return res.status(200).json({
+            message: 'Authorization successful',
+            token,
+          });
+        }
+        return res.status(401).json({
+          message: 'Authorization failed',
+        });
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+}
 
 export { signUp, login, deleteUser };
