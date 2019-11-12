@@ -6,18 +6,24 @@ function LandingPage() {
   return (
     <>
       <IndexHeader />
-      <section className="container-fluid">
+      <section className="container-fluid p-0 m-0" style={{ position: 'relative' }}>
         <div className="hero">
           <img
-            className="image-fluid rounded"
-            src={require('../../assets/images/smartphone-notebook-technology-calendar-6330.jpg')}
-            style={{ width: '40rem' }}
+            className=""
+            src={require('../../assets/images/woman-in-white-t-shirt-holding-smartphone-in-front-of-laptop-914931.jpg')}
+            style={{
+              height: '100vh',
+              backgroundSize: 'cover',
+              width: '100%'
+             }}
             alt=""
           />
         </div>
-        <Link to="/signup">
-          Get Started
-        </Link>
+        <div className="d-flex justify-content-end p-5" style={{ position: 'absolute', top: '3rem', width: '100%', }}>
+          <Link to="/signup">
+            <div className="btn btn-primary px-5 py-4">Get Started</div>
+          </Link>
+        </div>
       </section>
     </>
   );
