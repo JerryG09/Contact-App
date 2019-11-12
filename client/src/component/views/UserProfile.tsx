@@ -9,9 +9,7 @@ import { isArray } from 'util';
 // import { connect } from 'react-redux';
 // import { fetchContacts, addContact } from "../../containers/redux/actions"
 // import { getContacts, fetchDB } from '../../actions/contactActions';
-interface jQuery {
-
-}
+interface jQuery {}
 function Home(props: any) {
   const [currentContacts, setContacts]: any = useState([]);
   const { contactReducer: contact } = useSelector((state: any) => state);
@@ -36,11 +34,9 @@ function Home(props: any) {
     return <>'Loading...=>'</>;
   }
 
-  console.log(currentContacts[0])
+  console.log(currentContacts[0]);
 
   const data = currentContacts.map((contact: any) => (
-
-
     <div className="container" key={contact._id}>
       <div className="col d-flex mt-5">
         <div className="col-md-1">{contact.id}</div>
@@ -51,7 +47,8 @@ function Home(props: any) {
           <span
             className="btn btn-primary"
             id={contact.id}
-            data-toggle="modal" data-target="#exampleModal"
+            data-toggle="modal"
+            data-target="#exampleModal"
             onClick={loadId}
             data-name={contact.name}
           >
@@ -65,26 +62,25 @@ function Home(props: any) {
         </div>
       </div>
     </div>
-
   ));
 
-  function loadId(contact:any){
-      let target=contact.target;
-      console.log(target);
-      let name = $(target).attr("data-name")
+  function loadId(contact: any) {
+    let target = contact.target;
+    console.log(target);
+    let name = $(target).attr('data-name');
 
-      $('#exampleModal').on('shown.bs.modal', function (event) {
+    $('#exampleModal').on('shown.bs.modal', function(event) {
       console.log(name);
-      let modal = $(this)
-      modal.find(".modal-body").html(`<p>${name}</>`)
-  })
-  return null
+      let modal = $(this);
+      modal.find('.modal-body').html(`<p>${name}</>`);
+    });
+    return null;
   }
 
-    // $('#exampleModal').on('show.bs.modal', function (event) {
-    //   let modal = $(this)
-    //   modal.find(".modal-body").text("am working")
-    // })
+  // $('#exampleModal').on('show.bs.modal', function (event) {
+  //   let modal = $(this)
+  //   modal.find(".modal-body").text("am working")
+  // })
 
   function handleSubmit(newContact: any) {
     setContacts([...currentContacts, newContact]);
