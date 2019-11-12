@@ -2,7 +2,7 @@ import {
   GET_CONTACT,
   ADD_CONTACT,
   SET_CONTACT,
-  EDIT_CONTACT
+  EDIT_CONTACT,
 } from '../containers/redux/types';
 
 // const initialState = {
@@ -19,9 +19,9 @@ const contactReducer = (state: any = [], action: any) => {
     case ADD_CONTACT:
       return [...state, action.payload];
     case SET_CONTACT:
-      return [...state, action.payload];
+      return [...state, ...action.payload];
     case EDIT_CONTACT:
-      return [...state]
+      return [...state];
     default:
       return state;
   }
