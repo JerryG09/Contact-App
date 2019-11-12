@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import IndexHeader from '../../common/IndexHeader'
+import Footer from '../../common/Footer'
 
 function LandingPage() {
   return (
@@ -25,6 +26,7 @@ function LandingPage() {
           </Link>
         </div>
       </section>
+      <Footer />
     </>
   );
 }
