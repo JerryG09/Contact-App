@@ -4,19 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const user_1 = require("../controllers/user");
+// import { userValidator } from "../validation/contact"
 const router = express_1.default.Router();
 /* GET users listing. */
-router.get('/', function (_req, res) {
-    res.send('Hello User, How are you!');
-});
-router.post('/', function (_req, res) {
-    res.send('Hello User, What did you send!');
-});
-router.put('/', function (_req, res) {
-    res.send('Hello User, you made update!');
-});
-router.delete('/', function (_req, res) {
-    res.send('Hello User, you mean to delete!');
-});
+router.post('/signup', user_1.signUp);
+router.post('/login', user_1.login);
+router.delete('/:userId', user_1.deleteUser);
 exports.default = router;
 //# sourceMappingURL=users.js.map

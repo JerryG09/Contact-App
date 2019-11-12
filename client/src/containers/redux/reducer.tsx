@@ -1,8 +1,7 @@
 import { GET_CONTACT, FETCH_CONTACTS, ADD_CONTACT } from "./types";
 
 const initialState = {
-  contacts: [],
-  contact: {}
+  contacts: []
 }
 
 const contactReducer = (state = initialState, action: any) => {

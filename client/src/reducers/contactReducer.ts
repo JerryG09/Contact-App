@@ -19,7 +19,7 @@ const contactReducer = (state: any = [], action: any) => {
     case ADD_CONTACT:
       return [...state, action.payload];
     case SET_CONTACT:
-      return [...state, ...action.payload];
+      return [...state, action.payload];
     case EDIT_CONTACT:
       return [...state]
     default:

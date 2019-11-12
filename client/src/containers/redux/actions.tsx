@@ -39,3 +39,7 @@ export const addContact = () => (dispatch: any) => {
       dispatch()
     })
 }
+
+export const editContact = () => {
+
+}
