@@ -8,14 +8,6 @@ function Login() {
       <IndexHeader />
       <div className="container">
         <div className="bg-light p-5 rounded" style={{height: "80vh"}}>
-          {/* <div className="d-flex justify-content-end">
-            <Link to="/">
-              <span>
-                <i className="fa fa-chain"></i>
-                Home
-              </span>
-            </Link>
-          </div> */}
           <div className="row justify-content-center bg-secondary border rounded">
             <div className="d-flex flex-column" >
               <form action="">

@@ -7,7 +7,8 @@ function Services() {
     <>
       <IndexHeader />
       <div className="container">
-        <h2 className="mt-5 mb-5">What we do...</h2>
+        <h2 className="mt-5 mb-3">What we do...</h2>
+        <p className="mb-5 px-5">We can help you turn a disorderly mess of contacts into a cleanly sorted address book. With our app, you can spend less time looking for your contacts and more time actually connecting with them.</p>
         <div className="row">
           <div className="col-md-4" style={{height: '100%'}}>
             <img src={require('../../assets/images/apple-coffee-computer-desk-356056.jpg')}
