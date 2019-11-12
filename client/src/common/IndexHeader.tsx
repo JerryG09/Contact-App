@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function IndexHeader() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-blue bg-primary shadow">
+    <nav className="navbar navbar-expand-lg navbar-blue shadow" style={{backgroundColor: '#b2b2b2'}}>
       <div className="navbar-brand">
         <span className="text-danger">C</span>
         <span className="text-white">ontact</span>{' '}

@@ -1,21 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import IndexHeader from '../../common/IndexHeader';
+import Footer from '../../common/Footer'
 
 function signUp() {
   return (
     <div className="container-fluid m-0 p-0">
       <IndexHeader />
       <div className="container">
-        <div className="bg-light p-5 rounded" style={{ height: '80vh' }}>
-          {/* <div className="d-flex justify-content-end">
-            <Link to="/">
-              <span>
-                <i className="fa fa-chain"></i>
-                Home
-              </span>
-            </Link>
-          </div> */}
+        <div className="bg-light p-5 rounded" style={{ height: '84vh' }}>
           <div className="row justify-content-center bg-secondary border rounded">
             <div className="d-flex flex-column">
               <form action="">
@@ -74,6 +67,7 @@ function signUp() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

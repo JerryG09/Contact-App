@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Header } from '../../common';
 import { Contact } from '../contact';
 import Modal from '../contact/Modal';
-import { isArray } from 'util';
+import IndexHeader from '../../common/IndexHeader'
 // import "bootstrap/dist/js/bootstrap"
 // import { connect } from 'react-redux';
 // import { fetchContacts, addContact } from "../../containers/redux/actions"
@@ -92,7 +92,7 @@ function Home(props: any) {
 
   return (
     <div>
-      <Header />
+      <IndexHeader />
       <Modal />
       <Contact onSubmit={handleSubmit} />
       {data}

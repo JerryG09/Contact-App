@@ -16,7 +16,7 @@ function Community() {
                 className="img-fluid rounded"
               alt=""/>
           </div>
-          <div className="col-md-6 bg-light  border rounded">
+          <div className="col-md-6 bg-light border rounded">
             <h4 className="mt-3 lead">Offices</h4>
 
             <div className="d-flex flex-column justify-content-center">
