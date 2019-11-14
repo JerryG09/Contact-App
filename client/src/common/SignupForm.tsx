@@ -39,6 +39,7 @@ function SignupForm({}) {
                   <input
                     type="email"
                     placeholder="email"
+                    style={{padding: '0.3rem 0'}}
                     className="border border-primary rounded"
                     onChange={handleChange}
                     name="email"
@@ -52,6 +53,7 @@ function SignupForm({}) {
                 </div>
                 <div className="">
                   <input
+                    style={{padding: '0.3rem 0'}}
                     type="password"
                     placeholder="password"
                     className="border border-primary rounded"
@@ -67,6 +69,7 @@ function SignupForm({}) {
                 </div>
                 <div className="">
                   <input
+                    style={{padding: '0.3rem 0'}}
                     type="password"
                     placeholder="confirm password"
                     className="border border-primary rounded"
