@@ -1,29 +1,45 @@
 import Contacts from '../models/contacts';
+import joi from '@hapi/joi';
 import express from 'express';
+import { contactSchema } from '../validation/contact';
 
 function addContact(req: express.Request, res: express.Response) {
-  const { name, phone, email, company } = req.body;
-  if (!name || !phone || !email || !company) {
-    res.status(404).json({
-      message: 'Input fields are required',
-    });
+  // const { name, phone, email, company } = req.body;
+  // if (!name || !phone || !email || !company) {
+  //   res.status(404).json({
+  //     message: 'Input fields are required',
+  //   });
+
+  //   return;
+  // }
+
+  const { error, value, ...rest } = contactSchema.validate(req.body, {
+    abortEarly: false,
+    stripUnknown: true,
+  });
+
+  if (error) {
+    res.status(400).json({ error: error.details[0].message });
 
     return;
   }
 
-  const newContact = req.body;
+  // const newContact = req.body;
 
-  Contacts.find({ name })
+  Contacts.find({
+    email: value.email,
+    phone: value.phone,
+  })
     .then(dbData => {
       if (dbData.length === 0) {
-        const newUser = new Contacts(newContact);
+        const newUser = new Contacts(value);
 
         newUser
           .save()
           .then(_result => {
             return res.status(201).json({
               message: 'Contact added successfully',
-              newContact
+              data: value,
             });
           })
           .catch(err => {
