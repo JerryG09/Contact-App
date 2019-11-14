@@ -15,30 +15,52 @@ import { FaTrashAlt } from 'react-icons/fa';
 import { FiArchive } from 'react-icons/fi'
 import { MdContactPhone } from 'react-icons/md'
 import { IoIosContact } from 'react-icons/io'
+// import { AiOutlineUserAdd } from 'react-icons/ai'
+import { IoIosStarHalf } from 'react-icons/io';
+import { MdModeEdit } from 'react-icons/md';
+import { MdDeleteForever } from 'react-icons/md';
+import { AiOutlineUsergroupAdd } from 'react-icons/ai';
+import { MdStar } from 'react-icons/md';
+import { AiOutlineUser } from 'react-icons/ai';
+import { FiUsers } from 'react-icons/fi';
+import { FaUsersCog } from 'react-icons/fa';
+import { FaUserFriends } from 'react-icons/fa'
+import { GiCircle } from 'react-icons/gi';
+import { MdMailOutline } from 'react-icons/md';
+import { MdChatBubbleOutline } from 'react-icons/md';
+import { MdEdit } from 'react-icons/md'
 
 import Footer from '../../common/Footer'
 
 function Profile() {
   return(
     <div className="container-fluid p-0">
-      <nav className="navbar navbar-expand-lg navbar-blue shadow bg-primary" style={{backgroundColor: '#b2b2b2'}}>
-      <div className="navbar-brand">
+      <nav className="navbar navbar-expand-lg navbar-blue shadow bg-primary p-0 pl-3" style={{backgroundColor: '#b2b2b2'}}>
+      <div
+        className="navbar-brand pt-2"
+        style={{
+          width:'13.3rem',
+          display: 'flex',
+          justifyContent: 'flex-start'}}>
         <IoMdGrid
           className="mr-2"
           style={{
-            fontSize: '2rem',
+            fontSize: '1.4rem',
             color: '#fff'
           }}
         />
-        <h5 className="d-inline ml-1 mr-5 text-white">Contacts</h5>
+        <h5 className="d-inline ml-1 mr-5 ml-3 text-white" style={{fontSize: '1rem'}}>Contacts</h5>
+      </div>
 
+      <div className="" style={{width: '27rem'}}>
         <input
           type="text"
           // placeholder="search"
-          style={{width: '120%', marginLeft: '3.4rem'}}
+          style={{width: '120%'}}
           className="border rounded py-1"
-          />
+        />
       </div>
+
       <button
         className="navbar-toggler bg-white"
         type="button"
@@ -50,6 +72,7 @@ function Profile() {
       >
         <span className="navbar-toggler-icon bg-primary"></span>
       </button>
+
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul className="ml-auto navbar-nav">
           <li className="nav-item nav-link active">
@@ -93,14 +116,67 @@ function Profile() {
 
     {/* Inner Na */}
     <div className="container-fluid pt-2 pb-2" style={{backgroundColor: '#ccc'}}>
-      <div className="row pl-3">
-        <MdMenu
-          className="text-white"
-          style={{fontSize:'2.2rem'}}
-        />
-        <span className="btn btn-primary ml-2">New Contact</span>
+      <div className="row">
+        <div className="d-flex pl-3" style={{width: '15.3rem'}}>
+          <MdMenu
+            className="text-white pt-2"
+            style={{fontSize:'1.5rem'}}
+          />
+          <select id="" className="border-0 bg-primary ml-3 py-1">
+            <option value="">New contact</option>
+            <option value="">New contact list</option>
+            <option value="">New group</option>
+          </select>
+          {/* <span className="btn btn-primary ml-2">New Contact</span> */}
+        </div>
+
+        <div className="d-flex justify-content-between" style={{width: "83%", height: '1.9rem'}}>
+            <div className="d-flex justify-content-center" style={{height: '100%'}}>
+              <div className="d-flex">
+                <IoIosStarHalf
+                  className="text-primary"
+                  style={{fontSize: '1.4rem'}}
+                />
+                <p className="text-primary">Add to favorites</p>
+              </div>
+              <div className="d-flex ml-3">
+                <MdModeEdit
+                  className="text-primary"
+                  style={{fontSize: '1.4rem'}}
+                />
+                <p className="text-primary">Edit</p>
+              </div>
+              <div className="d-flex ml-3">
+                <MdDeleteForever
+                  className="text-primary"
+                  style={{fontSize: '1.4rem'}}
+                />
+                <p className="text-primary">Delete</p>
+              </div>
+              <div className="d-flex ml-3">
+                <AiOutlineUsergroupAdd
+                  className="text-primary"
+                  style={{fontSize: '1.4rem'}}
+                />
+                <p className="text-primary">Add to List</p>
+              </div>
+            </div>
+
+            <div className="d-flex">
+              <select className="border-0" placeholder="Managing">
+                <option value="">
+                  {/* <AiOutlineUserAdd /> */}
+                  Manage
+                </option>
+                <option value="">Import contacts</option>
+                <option value="">Export contacts</option>
+                <option value="">Link duplicate contacts</option>
+              </select>
+            </div>
+        </div>
       </div>
     </div>
+
 
     {/* Main Section */}
     <div className="container-fluid p-0" style={{height: '80vh'}}>
@@ -109,7 +185,7 @@ function Profile() {
         {/* Column--2 */}
         <div className="col-md-2 pt-4 px-0" style={{backgroundColor: '#c2c2c2', height: '100%'}}>
           <div className="d-flex pb-2" style={{paddingLeft: '2rem'}}>
-            <IoIosArrowDown
+            <MdStar
               className=''
               style={{fontSize:'1.1rem'}}
             />
@@ -117,11 +193,11 @@ function Profile() {
           </div>
           <div className="d-flex justify-content-between bg-primary" style={{padding: '0.5rem 2rem'}}>
             <div className="d-flex pt-1">
-              <FiInbox
+              <IoIosArrowDown
                 className=''
                 style={{fontSize:'1.1rem'}}
               />
-              <h5 className="ml-3" style={{fontSize: '0.9rem'}}>Inbox</h5>
+              <h5 className="ml-3" style={{fontSize: '0.9rem'}}>My Contacts</h5>
             </div>
             <div className="pt-1">
               <h6>6</h6>
@@ -129,26 +205,26 @@ function Profile() {
           </div>
           <div className="d-flex justify-content-between shadow" style={{padding: '0.5rem 2rem'}}>
             <div className="d-flex pt-1">
-              <IoMdSend
+              <AiOutlineUser
                 className=''
                 style={{fontSize:'1.1rem'}}
               />
-              <h5 className="ml-3" style={{fontSize: '0.9rem'}}>Sent Items</h5>
+              <h5 className="ml-3 lead" style={{fontSize: '0.9rem'}}>All Contacts</h5>
             </div>
             <div className="pt-1">
-              <h6>3</h6>
+
             </div>
           </div>
           <div className="d-flex justify-content-between shadow" style={{padding: '0.5rem 2rem'}}>
             <div className="d-flex pt-1">
-              <MdDrafts
+              <FiUsers
                 className=''
                 style={{fontSize:'1.1rem'}}
               />
-              <h5 className="ml-3" style={{fontSize: '0.9rem'}}>Drafts</h5>
+              <h5 className="ml-3 lead" style={{fontSize: '0.9rem'}}>All Contact Lists</h5>
             </div>
             <div className="pt-1">
-              <h6>5</h6>
+
             </div>
           </div>
           <div className="d-flex justify-content-between shadow" style={{padding: '0.5rem 2rem'}}>
@@ -157,7 +233,7 @@ function Profile() {
                 className=''
                 style={{fontSize:'1.1rem'}}
               />
-              <h5 className="ml-3" style={{fontSize: '0.9rem'}}>Trash</h5>
+              <h5 className="ml-3 lead" style={{fontSize: '0.9rem'}}>Deleted</h5>
             </div>
             <div className="pt-1">
               <h6>3</h6>
@@ -169,32 +245,65 @@ function Profile() {
                 className=''
                 style={{fontSize:'1.1rem'}}
               />
-              <h5 className="ml-3" style={{fontSize: '0.9rem'}}>Archived</h5>
+              <h5 className="ml-3 lead" style={{fontSize: '0.9rem'}}>Folders</h5>
             </div>
             <div className="pt-1">
-              <h6>11</h6>
+              <h6></h6>
             </div>
           </div>
+
+          {/* Second Side Group */}
+          <div className="d-flex pb-2 mt-4" style={{paddingLeft: '2rem'}}>
+            <IoIosArrowDown
+              className=''
+              style={{fontSize:'1.1rem'}}
+            />
+            <h5 className="ml-3" style={{fontSize:'1rem'}}>Groups</h5>
+          </div>
+
+          <div className="d-flex pb-2" style={{paddingLeft: '2rem'}}>
+            <FaUsersCog
+              className=''
+              style={{fontSize:'1.1rem'}}
+            />
+            <h5 className="ml-3 lead" style={{fontSize:'1rem'}}>Members</h5>
+          </div>
+
+          <div className="d-flex pb-2" style={{paddingLeft: '2rem'}}>
+            <FaUserFriends
+              className=''
+              style={{fontSize:'1.1rem'}}
+            />
+            <h5 className="ml-3 lead" style={{fontSize:'1rem'}}>Owners</h5>
+          </div>
+
 
           <div className="d-flex mt-4 pb-2" style={{paddingLeft: '3rem'}}>
             <h5 className="ml-3 text-primary lead" style={{fontSize:'1rem'}}>Coversation History</h5>
           </div>
         </div>
 
-        {/* Column--5 */}
-        <div className="col-md-5 pt-3 px-0" style={{backgroundColor: '#f4f2f2', height: '100%'}}>
+        {/* Column--4 */}
+        <div className="col-md-4 pt-3 px-0" style={{backgroundColor: '#f4f2f2', height: '100%'}}>
           <div className="d-flex justify-content-between pb-3" style={{padding: '0 2rem'}}>
             <div className="">
-              <MdContactPhone />
-              <h5 className="ml-3 d-inline-block" style={{fontSize:'1rem'}}>Contacts</h5>
+              <GiCircle
+                style={{fontSize: '1.5rem'}}
+              />
+              <h5 className="ml-3 d-inline-block" style={{fontSize:'1rem'}}>All Contacts</h5>
             </div>
             <div className="">
-              <select className="border-0 rounded text-primary">
-                <option value="">Filter</option>
+              <select className="border-0 rounded text-primary py-1">
+                <option value="">First name</option>
+                <option value="">Last name</option>
+                <option value="">Company</option>
+                <option value="">Home city</option>
+                <option value="">Work city</option>
+                <option value="">Recently added</option>
               </select>
             </div>
           </div>
-          <div className="d-flex px-lg-5 mb-3 justify-content-between shadow" style={{height: '5rem'}}>
+          <div className="d-flex px-2 mb-3 border-bottom" style={{height: '5rem'}}>
             <div className="">
               <IoIosContact
                 style={{fontSize: '4rem'}}
@@ -202,35 +311,75 @@ function Profile() {
               />
             </div>
             <div className="pt-2">
-              <h4 className="text-primary">AbdulRazak</h4>
-              <p className="">08199332244</p>
-            </div>
-            <div className="d-flex flex-column justify-content-center">
-              <Link to="">
-                <span className="btn btn-secondary">Detail</span>
-              </Link>
+              <h6 className="text-primary lead">AbdulRazak Darrot</h6>
+              <p className="">abz@gmail.com</p>
             </div>
           </div>
+        </div>
 
-          <div className="d-flex px-lg-5 mb-3 justify-content-between shadow" style={{height: '5rem'}}>
+        {/* Column--6 */}
+        <div className="col-md-6 pt-4 px-0">
+          <div className="d-flex px-3 mb-1">
             <div className="">
               <IoIosContact
-                style={{fontSize: '4rem'}}
-                className="text-primary pt-2"
+                style={{fontSize: '10rem'}}
+                className="text-primary"
               />
             </div>
-            <div className="pt-2">
-              <h4 className="text-primary">Usman Dembele</h4>
-              <p className="">0744556688</p>
+            <div className="d-flex flex-column text-left pt-4 ml-2">
+              <h6 className="text-primary lead">AbdulRazak Darrot</h6>
+              <p className="">Decagon</p>
+              <div className="d-flex">
+                <div className="d-flex justify-content-center">
+                  <MdMailOutline
+                    className="text-primary"
+                    style={{fontSize: '1.5rem'}}
+                  />
+                  <p className="ml-2">Send mail</p>
+                </div>
+                <div className="d-flex justify-content-center ml-5">
+                  <MdChatBubbleOutline
+                    className="text-primary"
+                    style={{fontSize: '1.5rem'}}
+                  />
+                  <p className="ml-2">Start chat</p>
+                </div>
+              </div>
             </div>
-            <div className="d-flex flex-column justify-content-center">
-              <Link to="">
-                <span className="btn btn-secondary">Detail</span>
-              </Link>
+          </div>
+          <div className="d-flex pl-4 border-bottom" style={{width: '100%'}}>
+            <h6 className="text-primary">Contact</h6>
+            <h6 className="ml-3">Files</h6>
+            <h6 className="ml-3">Email</h6>
+            <h6 className="ml-3">LinkedIn</h6>
+          </div>
+          <div className="d-flex justify-content-between pl-4 pr-5 pt-4">
+            <p>Contact information</p>
+            <div className="d-flex">
+              <MdEdit
+                style={{fontSize: '1.5rem'}}
+              />
+              <p>Edit contact</p>
+            </div>
+          </div>
+          <div className="row pl-5 border-bottom">
+            <div className="d-flex flex-column col-md-3 text-left border-right">
+              <p>Email</p>
+              <p className="text-primary">bondz@gmail.co</p>
+            </div>
+            <div className="d-flex flex-column col-md-3 text-left border-right">
+              <p>Mobile</p>
+              <p className="text-primary">0812233449</p>
+            </div>
+            <div className="d-flex flex-column col-md-3 text-left">
+              <p>Company</p>
+              <p className="text-primary">Decagon</p>
             </div>
           </div>
         </div>
       </div>
+
+
     </div>
 
     <Footer />
