@@ -9,6 +9,7 @@ import Community from './component/views/Community';
 import FAQ from './component/views/FAQ'
 import signUp from './component/views/SignUp'
 import Login from './component/views/Login'
+import Profile from './component/views/profilePage'
 
 
 const App: React.FC = () => {
@@ -23,6 +24,7 @@ const App: React.FC = () => {
           <Route path="/FAQ" exact component={FAQ} />
           <Route path="/signup" exact component={signUp} />
           <Route path="/login" exact component={Login} />
+          <Route path="/profile" exact component={Profile} />
 
         </Switch>
       </div>

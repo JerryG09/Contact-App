@@ -1,13 +1,33 @@
-import React from 'react'
+import React, { useState} from 'react'
 import { Link } from 'react-router-dom'
 
-function SignupForm(props: any) {
+function SignupForm({}) {
+  const user = {
+    email: "",
+    password: "",
+    confirm: ""
+  }
+
+  const [newUser, setUser] = useState(user)
+
+  function handleChange(e: any) {
+    e.preventDefault()
+    const value = e.target.value;
+    const name = e.target.name;
+    setUser({ ...newUser, [name]: value})
+    console.log(newUser)
+  }
+
+  function handleSubmit(e: any) {
+    e.preventDefault()
+  }
+
   return (
     <div className="container">
       <div className="bg-light p-5 rounded" style={{ height: '84vh' }}>
         <div className="row justify-content-center bg-secondary border rounded">
           <div className="d-flex flex-column">
-            <form action="">
+            <form onSubmit={handleSubmit}>
               <h4 className="lead bold mt-5 mb-4">Account Signup</h4>
               <div className="d-flex justify-content-between mt-3">
                 <div className="">
@@ -20,6 +40,9 @@ function SignupForm(props: any) {
                     type="email"
                     placeholder="email"
                     className="border border-primary rounded"
+                    onChange={handleChange}
+                    name="email"
+                    value={newUser.email}
                   />
                 </div>
               </div>
@@ -32,6 +55,9 @@ function SignupForm(props: any) {
                     type="password"
                     placeholder="password"
                     className="border border-primary rounded"
+                    onChange={handleChange}
+                    name="password"
+                    value={newUser.password}
                   />
                 </div>
               </div>
@@ -44,6 +70,9 @@ function SignupForm(props: any) {
                     type="password"
                     placeholder="confirm password"
                     className="border border-primary rounded"
+                    onChange={handleChange}
+                    name="confirm"
+                    value={newUser.confirm}
                   />
                 </div>
               </div>

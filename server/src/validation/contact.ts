@@ -4,7 +4,7 @@ const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
-const phoneRegex = /\+?234[789][01]\d{8}|0[789][01]\d{8}/;
+const phoneRegex = /^(\+?234[789][01]\d{8})$|^(0[789][01]\d{8})$/;
 
 const contactValidator = Joi.object().keys({
   name: Joi.string().alphanum().min(3).max(30).required(),
