@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { Contact } from '../contact';
+// import { Contact } from '../contact';
 import { Link } from 'react-router-dom'
 import {IoMdGrid} from 'react-icons/io'
 import {AiOutlineSkype} from 'react-icons/ai';
@@ -10,14 +10,10 @@ import { FiSettings } from 'react-icons/fi'
 import { FaQuestion } from 'react-icons/fa'
 import { IoIosMegaphone } from 'react-icons/io'
 import { MdMenu } from 'react-icons/md'
-import { IoIosArrowDown } from 'react-icons/io'
-// import { FiInbox } from 'react-icons/fi';
-// import { IoMdSend } from 'react-icons/io';
-// import { MdDrafts } from 'react-icons/md';
+import { IoIosArrowDown } from 'react-icons/io';
 import { FaTrashAlt } from 'react-icons/fa';
-import { FiArchive } from 'react-icons/fi'
-// import { MdContactPhone } from 'react-icons/md'
-import { IoIosContact } from 'react-icons/io'
+import { FiArchive } from 'react-icons/fi';
+// import { IoIosContact } from 'react-icons/io'
 import { IoIosStarHalf } from 'react-icons/io';
 import { MdModeEdit } from 'react-icons/md';
 import { MdDeleteForever } from 'react-icons/md';
@@ -28,10 +24,11 @@ import { FiUsers } from 'react-icons/fi';
 import { FaUsersCog } from 'react-icons/fa';
 import { FaUserFriends } from 'react-icons/fa'
 import { GiCircle } from 'react-icons/gi';
-import { MdMailOutline } from 'react-icons/md';
-import { MdChatBubbleOutline } from 'react-icons/md';
-import { MdEdit } from 'react-icons/md'
+// import { MdMailOutline } from 'react-icons/md';
+// import { MdChatBubbleOutline } from 'react-icons/md';
+// import { MdEdit } from 'react-icons/md'
 
+import MasterDetail from '../contact/MasterDetail'
 import Footer from '../../common/Footer'
 import ContactGridView from '../contact/ContactGridView';
 import { ContactType } from '../interface/interface'
@@ -345,22 +342,12 @@ function Profile() {
           </div>
 
           <ContactGridView contact={currentContacts} />
-          {/* <div className="d-flex px-2 mb-3 border-bottom" style={{height: '5rem'}}>
-            <div className="">
-              <IoIosContact
-                style={{fontSize: '4rem'}}
-                className="text-primary pt-2"
-              />
-            </div>
-            <div className="pt-2">
-              <h6 className="text-primary lead">AbdulRazak Darrot</h6>
-              <p className="">abz@gmail.com</p>
-            </div>
-          </div> */}
+
         </div>
 
         {/* Column--6 */}
-        <div className="col-md-6 pt-4 px-0">
+        <MasterDetail />
+        {/* <div className="col-md-6 pt-4 px-0">
           <div className="d-flex px-3 mb-1">
             <div className="">
               <IoIosContact
@@ -418,7 +405,7 @@ function Profile() {
               <p className="text-primary">Decagon</p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
 
