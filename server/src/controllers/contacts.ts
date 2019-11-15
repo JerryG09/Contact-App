@@ -1,7 +1,6 @@
 import Contacts from '../models/contacts';
-import joi from '@hapi/joi';
 import express from 'express';
-import { contactSchema } from '../validation/contact';
+import { contactSchema, editContactSchema } from '../validation/contact';
 
 function addContact(req: express.Request, res: express.Response) {
   // const { name, phone, email, company } = req.body;
@@ -46,7 +45,9 @@ function addContact(req: express.Request, res: express.Response) {
             console.error(err);
           });
       } else {
-        throw new Error('User with name exist');
+        res.status(404).json({ message: 'Contact not found' });
+
+        return;
       }
     })
     .catch(_err => {
@@ -57,28 +58,29 @@ function addContact(req: express.Request, res: express.Response) {
 }
 
 function fetchAllContacts(_req: express.Request, res: express.Response) {
-  return Contacts.find({})
+  return Contacts.find({ deletedAt: null }).sort({ firstName: 'asc' })
     .then(data => {
       return res.status(200).json({
         success: true,
         data,
       });
     })
-    .catch(err => {
-      console.error(err);
-      return res.status(400).json({
+    .catch(_err => {
+      return res.status(500).json({
         succes: false,
-        message: 'Contact not found',
+        message: 'An error occurred. Please try again later'
       });
     });
 }
 
 function findAContact(req: express.Request, res: express.Response) {
-  const phone = req.params.phone;
-  return Contacts.findOne({ phone })
+  const contactID = req.params.contactID;
+  return Contacts.findById({ _id: contactID })
     .then(data => {
       if (!data) {
-        throw new Error('Contact not found');
+        res.status(404).json({ message: 'Contact not found' });
+
+        return;
       }
       return res.status(200).json({
         success: true,
@@ -95,25 +97,31 @@ function findAContact(req: express.Request, res: express.Response) {
 }
 
 function editContact(req: express.Request, res: express.Response) {
-  const phoneId = req.params.phoneId;
-  const { name, email, phone, company } = req.body;
+  const contactID: String = req.params.contactID
 
-  Contacts.findOne({ phone: phoneId })
+  const { error, value, ...rest } = editContactSchema.validate(req.body, {
+    abortEarly: false,
+    stripUnknown: true,
+  });
+
+  if (error) {
+    res.status(400).json({ message: 'Please pass only valid values', error });
+
+    return;
+  }
+
+  Contacts.findOneAndUpdate({ _id: contactID }, value, {
+    new: true,
+   })
     .then(data => {
       if (!data) {
-        throw new Error('Contact not found');
+        res.status(404).json({ message: 'Contact to edit not found' });
+
+        return;
       }
-
-      // const { name, email, phone, company, ...rest } = data
-
-      name ? (data.name = name) : data.name;
-      email ? (data.email = email) : data.email;
-      phone ? (data.phone = phone) : data.email;
-      company ? (data.company = company) : data.company;
-
       res.status(200).json({
         success: true,
-        data,
+        data
       });
     })
     .catch(err => {
