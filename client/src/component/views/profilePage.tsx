@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { Contact } from '../contact';
 import { Link } from 'react-router-dom'
 import {IoMdGrid} from 'react-icons/io'
 import {AiOutlineSkype} from 'react-icons/ai';
@@ -8,14 +11,13 @@ import { FaQuestion } from 'react-icons/fa'
 import { IoIosMegaphone } from 'react-icons/io'
 import { MdMenu } from 'react-icons/md'
 import { IoIosArrowDown } from 'react-icons/io'
-import { FiInbox } from 'react-icons/fi';
-import { IoMdSend } from 'react-icons/io';
-import { MdDrafts } from 'react-icons/md';
+// import { FiInbox } from 'react-icons/fi';
+// import { IoMdSend } from 'react-icons/io';
+// import { MdDrafts } from 'react-icons/md';
 import { FaTrashAlt } from 'react-icons/fa';
 import { FiArchive } from 'react-icons/fi'
-import { MdContactPhone } from 'react-icons/md'
+// import { MdContactPhone } from 'react-icons/md'
 import { IoIosContact } from 'react-icons/io'
-// import { AiOutlineUserAdd } from 'react-icons/ai'
 import { IoIosStarHalf } from 'react-icons/io';
 import { MdModeEdit } from 'react-icons/md';
 import { MdDeleteForever } from 'react-icons/md';
@@ -31,8 +33,41 @@ import { MdChatBubbleOutline } from 'react-icons/md';
 import { MdEdit } from 'react-icons/md'
 
 import Footer from '../../common/Footer'
+import ContactGridView from '../contact/ContactGridView';
+import { ContactType } from '../interface/interface'
 
 function Profile() {
+  const [currentContacts, setContacts]: [ContactType[], Function] = useState([]);
+  const { contactReducer: contact } = useSelector((state: any) => state);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios('http://localhost:5050/api/v1/contacts');
+      dispatch({
+        type: 'SET_CONTACT',
+        payload: result.data.data,
+      });
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    setContacts(contact);
+  }, [contact]);
+
+  if (!currentContacts) {
+    return <>'Loading...=>'</>;
+  }
+
+  console.log(currentContacts);
+
+
+
+
+
+
+
   return(
     <div className="container-fluid p-0">
       <nav className="navbar navbar-expand-lg navbar-blue shadow bg-primary p-0 pl-3" style={{backgroundColor: '#b2b2b2'}}>
@@ -76,6 +111,11 @@ function Profile() {
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul className="ml-auto navbar-nav">
           <li className="nav-item nav-link active">
+            <Link to="/" className="text-white">
+              Home
+            </Link>
+          </li>
+          <li className="nav-item nav-link active">
             <AiOutlineSkype
               className="text-white"
               style={{fontSize:'1.4rem'}}
@@ -114,7 +154,7 @@ function Profile() {
       </div>
     </nav>
 
-    {/* Inner Na */}
+    {/* Inner Nav */}
     <div className="container-fluid pt-2 pb-2" style={{backgroundColor: '#ccc'}}>
       <div className="row">
         <div className="d-flex pl-3" style={{width: '15.3rem'}}>
@@ -303,7 +343,9 @@ function Profile() {
               </select>
             </div>
           </div>
-          <div className="d-flex px-2 mb-3 border-bottom" style={{height: '5rem'}}>
+
+          <ContactGridView contact={currentContacts} />
+          {/* <div className="d-flex px-2 mb-3 border-bottom" style={{height: '5rem'}}>
             <div className="">
               <IoIosContact
                 style={{fontSize: '4rem'}}
@@ -314,7 +356,7 @@ function Profile() {
               <h6 className="text-primary lead">AbdulRazak Darrot</h6>
               <p className="">abz@gmail.com</p>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Column--6 */}

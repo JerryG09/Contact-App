@@ -1,6 +1,6 @@
 import joi from '@hapi/joi';
 
-const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
@@ -58,7 +58,12 @@ const editContactSchema = joi.object({
     .max(255)
     .trim()
     .lowercase(),
-  lastName: joi.ref('firstName'),
+  lastName: joi
+    .string()
+    .min(1)
+    .max(255)
+    .trim()
+    .lowercase(),
   email: joi
     .string()
     .email()
@@ -76,4 +81,4 @@ const editContactSchema = joi.object({
     .allow(''),
 });
 
-export { contactSchema, editContactSchema }
+export { contactSchema, editContactSchema };

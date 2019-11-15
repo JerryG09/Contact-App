@@ -1,27 +1,83 @@
 "use strict";
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Joi = __importStar(require("@hapi/joi"));
-const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+const joi_1 = __importDefault(require("@hapi/joi"));
+const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 const phoneRegex = /^(\+?234[789][01]\d{8})$|^(0[789][01]\d{8})$/;
-const contactValidator = Joi.object().keys({
-    name: Joi.string().alphanum().min(3).max(30).required(),
-    phone: Joi.string().regex(phoneRegex).required(),
-    email: Joi.string().email().regex(emailRegex).required(),
-    company: Joi.string().min(3).max(30).required()
+// const contactValidator = Joi.object().keys({
+//   name: Joi.string().alphanum().min(3).max(30).required(),
+//   phone: Joi.string().regex(phoneRegex).required(),
+//   email: Joi.string().email().regex(emailRegex).required(),
+//   company: Joi.string().min(3).max(30).required()
+// })
+// const userValidator = Joi.object().keys({
+//   password: Joi.string().regex(passwordRegex).required(),
+//   password_confirmation: Joi.any().equal(Joi.ref('password')).required(),
+//   email: Joi.string().email().regex(emailRegex)
+// })
+const contactSchema = joi_1.default.object({
+    firstName: joi_1.default
+        .string()
+        .min(1)
+        .max(255)
+        .trim()
+        .lowercase()
+        .required(),
+    lastName: joi_1.default
+        .string()
+        .min(1)
+        .max(255)
+        .trim()
+        .lowercase()
+        .required(),
+    email: joi_1.default
+        .string()
+        .email()
+        .lowercase()
+        .regex(emailRegex)
+        .allow(''),
+    phone: joi_1.default
+        .string()
+        .min(11)
+        .max(14)
+        .pattern(phoneRegex),
+    company: joi_1.default
+        .string()
+        .trim()
+        .allow(''),
 });
-exports.contactValidator = contactValidator;
-const userValidator = Joi.object().keys({
-    password: Joi.string().regex(passwordRegex).required(),
-    password_confirmation: Joi.any().equal(Joi.ref('password')).required(),
-    email: Joi.string().email().regex(emailRegex)
+exports.contactSchema = contactSchema;
+const editContactSchema = joi_1.default.object({
+    firstName: joi_1.default
+        .string()
+        .min(1)
+        .max(255)
+        .trim()
+        .lowercase(),
+    lastName: joi_1.default
+        .string()
+        .min(1)
+        .max(255)
+        .trim()
+        .lowercase(),
+    email: joi_1.default
+        .string()
+        .email()
+        .lowercase()
+        .pattern(emailRegex)
+        .allow(''),
+    phone: joi_1.default
+        .string()
+        .min(11)
+        .max(14)
+        .pattern(phoneRegex),
+    company: joi_1.default
+        .string()
+        .trim()
+        .allow(''),
 });
-exports.userValidator = userValidator;
+exports.editContactSchema = editContactSchema;
 //# sourceMappingURL=contact.js.map

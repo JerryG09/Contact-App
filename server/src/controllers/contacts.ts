@@ -158,10 +158,15 @@ function deleteContact(req: express.Request, res: express.Response) {
     });
 }
 
+function search(req: express.Request, res: express.Response) {
+
+}
+
 export {
   addContact,
   findAContact,
   fetchAllContacts,
   editContact,
   deleteContact,
+  search
 };
