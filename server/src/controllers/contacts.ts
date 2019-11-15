@@ -134,20 +134,19 @@ function editContact(req: express.Request, res: express.Response) {
 }
 
 function deleteContact(req: express.Request, res: express.Response) {
-  const phoneId = req.params.phoneId;
+  const contactID = req.params.contactID;
 
-  return Contacts.remove({ phone: phoneId })
+  return Contacts.findOneAndUpdate({ _id: contactID }, { deletedAt: new Date() })
     .then(data => {
-      if (data.n === 0) {
+      if (!data) {
         return res.status(404).json({
-          message: 'Contact not found',
+          message: 'Contact to delete not found',
         });
       }
 
       return res.status(200).json({
         success: true,
-        message: 'contact removed successfully',
-        data,
+        message: 'contact deleted successfully',
       });
     })
     .catch(err => {

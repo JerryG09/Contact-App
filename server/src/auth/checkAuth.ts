@@ -5,7 +5,7 @@ export const checkAuth = (req: express.Request, res: express.Response,next: expr
   try {
     const token: string = req.headers.authorization.split(' ')[1];
     const decoded = jwt.verify(token, 'secret');
-
+    
     req.body.userData = decoded;
     next();
   } catch (err) {

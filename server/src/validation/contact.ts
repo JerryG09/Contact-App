@@ -51,4 +51,29 @@ const contactSchema = joi.object({
     .allow(''),
 });
 
-export { contactSchema }
+const editContactSchema = joi.object({
+  firstName: joi
+    .string()
+    .min(1)
+    .max(255)
+    .trim()
+    .lowercase(),
+  lastName: joi.ref('firstName'),
+  email: joi
+    .string()
+    .email()
+    .lowercase()
+    .pattern(emailRegex)
+    .allow(''),
+  phone: joi
+    .string()
+    .min(11)
+    .max(14)
+    .pattern(phoneRegex),
+  company: joi
+    .string()
+    .trim()
+    .allow(''),
+});
+
+export { contactSchema, editContactSchema }
