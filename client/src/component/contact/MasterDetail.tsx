@@ -1,10 +1,14 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+
 import { MdMailOutline } from 'react-icons/md';
 import { MdChatBubbleOutline } from 'react-icons/md';
 import { MdEdit } from 'react-icons/md'
 import { IoIosContact } from 'react-icons/io'
 
 function MasterDetail() {
+  const { contactID } = useParams();
+  
   return (
     <div className="col-md-6 pt-4 px-0">
       <div className="d-flex px-3 mb-1">

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-// import { Contact } from '../contact';
-import { Link } from 'react-router-dom'
+
+import { Link, Route } from 'react-router-dom'
 import {IoMdGrid} from 'react-icons/io'
 import {AiOutlineSkype} from 'react-icons/ai';
 import {GoChecklist} from 'react-icons/go'
@@ -13,7 +13,6 @@ import { MdMenu } from 'react-icons/md'
 import { IoIosArrowDown } from 'react-icons/io';
 import { FaTrashAlt } from 'react-icons/fa';
 import { FiArchive } from 'react-icons/fi';
-// import { IoIosContact } from 'react-icons/io'
 import { IoIosStarHalf } from 'react-icons/io';
 import { MdModeEdit } from 'react-icons/md';
 import { MdDeleteForever } from 'react-icons/md';
@@ -24,9 +23,6 @@ import { FiUsers } from 'react-icons/fi';
 import { FaUsersCog } from 'react-icons/fa';
 import { FaUserFriends } from 'react-icons/fa'
 import { GiCircle } from 'react-icons/gi';
-// import { MdMailOutline } from 'react-icons/md';
-// import { MdChatBubbleOutline } from 'react-icons/md';
-// import { MdEdit } from 'react-icons/md'
 
 import MasterDetail from '../contact/MasterDetail'
 import Footer from '../../common/Footer'
@@ -57,7 +53,7 @@ function Profile() {
     return <>'Loading...=>'</>;
   }
 
-  console.log(currentContacts);
+  // console.log(currentContacts);
 
 
 
@@ -84,12 +80,16 @@ function Profile() {
         <h5 className="d-inline ml-1 mr-5 ml-3 text-white" style={{fontSize: '1rem'}}>Contacts</h5>
       </div>
 
-      <div className="" style={{width: '27rem'}}>
+      <div className="d-flex" style={{width: '27rem', position: 'relative'}}>
+        <IoMdGrid
+          className=""
+          style={{ position: 'absolute', top: '0.7rem', left: '0.4rem', fontSize: '1.2rem' }}
+        />
         <input
           type="text"
-          // placeholder="search"
-          style={{width: '120%'}}
-          className="border rounded py-1"
+          placeholder="search"
+          style={{width: '120%', paddingLeft: '2.1rem'}}
+          className="border lead rounded py-1"
         />
       </div>
 
@@ -345,7 +345,9 @@ function Profile() {
         </div>
 
         {/* Column--6 */}
-        <MasterDetail />
+        <Route path="/contacts/:contactID">
+          <MasterDetail />
+        </Route>
       </div>
 
 

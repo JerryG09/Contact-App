@@ -5,17 +5,10 @@ import {
   EDIT_CONTACT,
 } from '../containers/redux/types';
 
-// const initialState = {
-
-// }
-
 const contactReducer = (state: any = [], action: any) => {
   switch (action.type) {
     case GET_CONTACT:
-      return {
-        ...state,
-        ...action.payload,
-      };
+      return [...state, ...action.payload];
     case ADD_CONTACT:
       return [...state, action.payload];
     case SET_CONTACT:
