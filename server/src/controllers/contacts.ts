@@ -1,49 +1,27 @@
 import Contacts from '../models/contacts';
 import express from 'express';
 import { contactSchema, editContactSchema } from '../validation/contact';
+import { contactInfo } from '../interface/Interface'
 
-function addContact(req: express.Request, res: express.Response) {
-  const { error, value, ...rest } = contactSchema.validate(req.body, {
-    abortEarly: false,
-    stripUnknown: true,
-  });
+async function addContact(contactObj: contactInfo) {
+  const existingContact = await Contacts.find({
+    email: contactObj.email,
+    phone: contactObj.phone,
+  })
 
-  if (error) {
-    res.status(400).json({ error: error.details[0].message });
-
-    return;
+  if (existingContact.length !== 0) {
+    throw new Error('Contact already exists');
   }
 
-  Contacts.find({
-    email: value.email,
-    phone: value.phone,
-  })
-    .then(dbData => {
-      if (dbData.length === 0) {
-        const newUser = new Contacts(value);
+  // if (error) {
+  //   res.status(400).json({ error: error.details[0].message });
 
-        newUser
-          .save()
-          .then(_result => {
-            return res.status(201).json({
-              message: 'Contact added successfully',
-              data: value,
-            });
-          })
-          .catch(err => {
-            console.error(err);
-          });
-      } else {
-        res.status(404).json({ message: 'Contact not found' });
+  //   return;
+  // }
 
-        return;
-      }
-    })
-    .catch(_err => {
-      res.status(409).json({
-        message: 'User with detail exist',
-      });
-    });
+  const contact = new Contacts(contactObj)
+
+  return contact.save();
 }
 
 async function getAllContacts() {
@@ -63,7 +41,7 @@ async function findContact({
 }
 
 
-function getAContact(contactID: string) {
+async function getAContact(contactID: string) {
   return Contacts.findById(contactID)
 }
 

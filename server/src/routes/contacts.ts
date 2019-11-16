@@ -2,6 +2,7 @@ import express from 'express';
 import { addContact, getAllContacts, getAContact, editContact, deleteContact, findContact } from '../controllers/contacts';
 const router = express.Router();
 import { checkAuth } from '../auth/checkAuth'
+import { contactSchema, editContactSchema } from '../validation/contact';
 
 router.get('/', (_req, res) => {
   getAllContacts()
@@ -53,7 +54,28 @@ router.get('/:contactID', checkAuth, (req, res) => {
     });
 });
 
-router.post('/', checkAuth, addContact);
+router.post('/', checkAuth, async (req, res) => {
+  const { error, value } = contactSchema.validate(req.body, {
+    abortEarly: false,
+    stripUnknown: true,
+  });
+
+  if (error) {
+    res.status(400).json({ message: 'Please provide valid parameters', error: error.details[0].message });
+
+    return;
+  }
+
+  try {
+    const doc = await addContact(value);
+
+    res.status(200).json({ data: doc.toJSON() });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+
+    return;
+  }
+});
 
 
 router.patch('/:contactID', checkAuth, editContact);
