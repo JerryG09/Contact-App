@@ -78,7 +78,28 @@ router.post('/', checkAuth, async (req, res) => {
 });
 
 
-router.patch('/:contactID', checkAuth, editContact);
+router.patch('/:contactID', checkAuth, async (req, res) => {
+  const { error, value } = editContactSchema.validate(req.body, {
+    abortEarly: false,
+    stripUnknown: true,
+  });
+
+  if (error) {
+    res.status(400).json({ message: 'Please pass only valid values', error: error.details[0].message });
+
+    return;
+  }
+
+  const doc = await editContact(req.params.contactID, value);
+
+  if (!doc) {
+    res.status(404).json({ message: 'Contact to edit not found' });
+
+    return;
+  }
+
+  res.status(200).json({ data: doc.toJSON() });
+});
 
 router.delete('/:contactID', checkAuth, deleteContact);
 

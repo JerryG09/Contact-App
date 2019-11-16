@@ -1,6 +1,6 @@
 import Contacts from '../models/contacts';
 import express from 'express';
-import { contactSchema, editContactSchema } from '../validation/contact';
+// import { contactSchema, editContactSchema } from '../validation/contact';
 import { contactInfo } from '../interface/Interface'
 
 async function addContact(contactObj: contactInfo) {
@@ -12,12 +12,6 @@ async function addContact(contactObj: contactInfo) {
   if (existingContact.length !== 0) {
     throw new Error('Contact already exists');
   }
-
-  // if (error) {
-  //   res.status(400).json({ error: error.details[0].message });
-
-  //   return;
-  // }
 
   const contact = new Contacts(contactObj)
 
@@ -45,41 +39,14 @@ async function getAContact(contactID: string) {
   return Contacts.findById(contactID)
 }
 
-function editContact(req: express.Request, res: express.Response) {
-  const contactID: String = req.params.contactID
+function editContact(
+  contactID: string,
+  contactObj: Partial<contactInfo>,
+  ) {
 
-  const { error, value, ...rest } = editContactSchema.validate(req.body, {
-    abortEarly: false,
-    stripUnknown: true,
-  });
-
-  if (error) {
-    res.status(400).json({ message: 'Please pass only valid values', error });
-
-    return;
-  }
-
-  Contacts.findOneAndUpdate({ _id: contactID }, value, {
-    new: true,
-   })
-    .then(data => {
-      if (!data) {
-        res.status(404).json({ message: 'Contact to edit not found' });
-
-        return;
-      }
-      res.status(200).json({
-        success: true,
-        data
-      });
-    })
-    .catch(err => {
-      console.error(err);
-      return res.status(400).json({
-        succes: false,
-        message: 'Contact not found',
-      });
-    });
+    return Contacts.findOneAndUpdate({ _id: contactID }, contactObj, {
+      new: true,
+  })
 }
 
 function deleteContact(req: express.Request, res: express.Response) {
