@@ -49,7 +49,7 @@ function AddContactForm() {
                 className="border-0 py-2 px-2"
                 placeholder="Email address"
                 style={{width: '101%'}}
-                type="text"/>
+                type="email"/>
             </div>
             <div className="mt-3">
               <input

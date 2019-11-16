@@ -10,6 +10,8 @@ import FAQ from './component/views/FAQ'
 import signUp from './component/views/SignUp'
 import Login from './component/views/Login'
 import Profile from './component/views/profilePage'
+import AddContactForm from './component/views/AddContactForm'
+
 
 
 const App: React.FC = () => {
@@ -25,6 +27,7 @@ const App: React.FC = () => {
           <Route path="/signup" exact component={signUp} />
           <Route path="/login" exact component={Login} />
           <Route path="/profile" exact component={Profile} />
+          <Route path="/contact" exact component={AddContactForm} />
 
         </Switch>
       </div>
