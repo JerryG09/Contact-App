@@ -101,6 +101,18 @@ router.patch('/:contactID', checkAuth, async (req, res) => {
   res.status(200).json({ data: doc.toJSON() });
 });
 
-router.delete('/:contactID', checkAuth, deleteContact);
+router.delete('/:contactID', checkAuth, async (req, res) => {
+  const contactID = req.params.contactID;
+
+  const doc = await deleteContact(contactID);
+
+  if (!doc) {
+    res.status(404).json({ message: 'Contact to delete not found' });
+
+    return;
+  }
+
+  res.status(200).json({ data: doc.id });
+});
 
 export default router;

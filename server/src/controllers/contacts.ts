@@ -1,6 +1,4 @@
 import Contacts from '../models/contacts';
-import express from 'express';
-// import { contactSchema, editContactSchema } from '../validation/contact';
 import { contactInfo } from '../interface/Interface'
 
 async function addContact(contactObj: contactInfo) {
@@ -39,7 +37,7 @@ async function getAContact(contactID: string) {
   return Contacts.findById(contactID)
 }
 
-function editContact(
+async function editContact(
   contactID: string,
   contactObj: Partial<contactInfo>,
   ) {
@@ -49,29 +47,11 @@ function editContact(
   })
 }
 
-function deleteContact(req: express.Request, res: express.Response) {
-  const contactID = req.params.contactID;
-
-  return Contacts.findOneAndUpdate({ _id: contactID }, { deletedAt: new Date() })
-    .then(data => {
-      if (!data) {
-        return res.status(404).json({
-          message: 'Contact to delete not found',
-        });
-      }
-
-      return res.status(200).json({
-        success: true,
-        message: 'contact deleted successfully',
-      });
-    })
-    .catch(err => {
-      console.error(err);
-      return res.status(400).json({
-        succes: false,
-        message: 'Contact not found',
-      });
-    });
+async function deleteContact(contactID: string) {
+  return Contacts.findOneAndUpdate(
+    { _id: contactID },
+    { deletedAt: new Date() }
+  );
 }
 
 export {
