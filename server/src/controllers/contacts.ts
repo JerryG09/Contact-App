@@ -50,6 +50,19 @@ async function getAllContacts() {
   return Contacts.find({ deletedAt: null }).sort({ firstName: 'asc' })
 }
 
+async function findContact({
+  phone,
+  archived
+}: {
+  phone?: string;
+  archived?: boolean
+}) {
+  const deletedAt = archived ? { $not: { $eq: null } } : { $eq: null }
+
+  return Contacts.find({ $and: [{ phone }, { deletedAt }] });
+}
+
+
 function getAContact(req: express.Request, res: express.Response) {
   const contactID = req.params.contactID;
   return Contacts.findById({ _id: contactID })
@@ -135,15 +148,11 @@ function deleteContact(req: express.Request, res: express.Response) {
     });
 }
 
-function search(req: express.Request, res: express.Response) {
-
-}
-
 export {
   addContact,
   getAContact,
   getAllContacts,
   editContact,
   deleteContact,
-  search
+  findContact
 };
