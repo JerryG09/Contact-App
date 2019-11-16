@@ -63,27 +63,8 @@ async function findContact({
 }
 
 
-function getAContact(req: express.Request, res: express.Response) {
-  const contactID = req.params.contactID;
-  return Contacts.findById({ _id: contactID })
-    .then(data => {
-      if (!data) {
-        res.status(404).json({ message: 'Contact not found' });
-
-        return;
-      }
-      return res.status(200).json({
-        success: true,
-        data,
-      });
-    })
-    .catch(err => {
-      console.error(err);
-      return res.status(400).json({
-        succes: false,
-        message: 'Contact not found',
-      });
-    });
+function getAContact(contactID: string) {
+  return Contacts.findById(contactID)
 }
 
 function editContact(req: express.Request, res: express.Response) {
