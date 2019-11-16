@@ -3,15 +3,6 @@ import express from 'express';
 import { contactSchema, editContactSchema } from '../validation/contact';
 
 function addContact(req: express.Request, res: express.Response) {
-  // const { name, phone, email, company } = req.body;
-  // if (!name || !phone || !email || !company) {
-  //   res.status(404).json({
-  //     message: 'Input fields are required',
-  //   });
-
-  //   return;
-  // }
-
   const { error, value, ...rest } = contactSchema.validate(req.body, {
     abortEarly: false,
     stripUnknown: true,
@@ -22,8 +13,6 @@ function addContact(req: express.Request, res: express.Response) {
 
     return;
   }
-
-  // const newContact = req.body;
 
   Contacts.find({
     email: value.email,
@@ -57,23 +46,11 @@ function addContact(req: express.Request, res: express.Response) {
     });
 }
 
-function fetchAllContacts(_req: express.Request, res: express.Response) {
+async function getAllContacts() {
   return Contacts.find({ deletedAt: null }).sort({ firstName: 'asc' })
-    .then(data => {
-      return res.status(200).json({
-        success: true,
-        data,
-      });
-    })
-    .catch(_err => {
-      return res.status(500).json({
-        succes: false,
-        message: 'An error occurred. Please try again later'
-      });
-    });
 }
 
-function findAContact(req: express.Request, res: express.Response) {
+function getAContact(req: express.Request, res: express.Response) {
   const contactID = req.params.contactID;
   return Contacts.findById({ _id: contactID })
     .then(data => {
@@ -164,8 +141,8 @@ function search(req: express.Request, res: express.Response) {
 
 export {
   addContact,
-  findAContact,
-  fetchAllContacts,
+  getAContact,
+  getAllContacts,
   editContact,
   deleteContact,
   search
