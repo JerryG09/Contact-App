@@ -24,14 +24,15 @@ import { FaUsersCog } from 'react-icons/fa';
 import { FaUserFriends } from 'react-icons/fa'
 import { GiCircle } from 'react-icons/gi';
 
+import AddContactForm from './AddContactForm'
 import MasterDetail from '../contact/MasterDetail'
 import Footer from '../../common/Footer'
 import ContactGridView from '../contact/ContactGridView';
-import { ContactType } from '../interface/interface'
+import { ContactType, State } from '../interface/interface'
 
 function Profile() {
   const [currentContacts, setContacts]: [ContactType[], Function] = useState([]);
-  const { contactReducer: contact } = useSelector((state: any) => state);
+  const { contactReducer: contact } = useSelector((state: State) => state);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -159,14 +160,14 @@ function Profile() {
             className="text-white pt-2"
             style={{fontSize:'1.5rem'}}
           />
-          <button className="ml-3 border-0">
-            <select id="" className="border-0">
+          <span className="ml-3 border-0 btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            {/* <select id="" className="border-0">
               <option value="">New contact</option>
               <option value="">New contact list</option>
               <option value="">New group</option>
-            </select>
-          </button>
-          {/* <span className="btn btn-primary ml-2">New Contact</span> */}
+            </select> */}
+            Add Contact
+          </span>
         </div>
 
         <div className="d-flex justify-content-between" style={{width: "83%", height: '1.9rem'}}>
@@ -345,13 +346,15 @@ function Profile() {
         </div>
 
         {/* Column--6 */}
-        <Route path="/contacts/:contactID">
+        {/* <Route path="/contacts/:_id">
           <MasterDetail />
-        </Route>
+        </Route> */}
+        <MasterDetail />
       </div>
 
 
     </div>
+    <AddContactForm />
 
     <Footer />
     </div>
